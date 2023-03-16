@@ -1,4 +1,6 @@
 from bs4 import BeautifulSoup as bs
+from random import randint
+from time import sleep
 import requests
 import lxml
 
@@ -27,5 +29,11 @@ for link in links:
     box = soup.find('article', class_='main-article')
     title = box.find('h1').get_text()
     transcript = box.find('div', class_='full-script').get_text(strip=True, separator=' ')
-    with open(f'{title}.txt', 'w') as file:
-        file.write(transcript)
+       
+    # test print to screen instead of file
+    print(transcript)
+    # with open(f'{title}.txt', 'w') as file:
+    #     file.write(transcript)
+
+    # random 1 to 5 second delay
+    sleep(randint(1,5))

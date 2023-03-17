@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup as bs
-from random import randint
+from numpy.random import default_rng
 from time import sleep
 import requests
 import lxml
@@ -10,16 +10,13 @@ website = f'{root}/movies'
 result = requests.get(website)
 content = result.text
 soup = bs(content, 'lxml')
-# print(soup.prettify())
-
+t_count = 1
 
 box = soup.find('article', class_='main-article')
 
 links = []
 for link in box.find_all('a', href=True):  # list of links
     links.append(link['href'])
-
-print(links)
 
 for link in links:
     website = f'{root}/{link}'
@@ -34,5 +31,15 @@ for link in links:
     #
     # with open(f'{title}.txt', 'w') as file:
     #     file.write(transcript)  
-    #   
-    sleep(randint(1,3))  # random 1 to 3 second delay
+    #
+    rng = default_rng()
+    sleep_delay = rng.uniform(1,3)
+    print(t_count,title)
+    print('delaying for : ', sleep_delay, ' seconds')
+    sleep(sleep_delay)  # random 1 to 3 second delay
+    print('sleep delay finished')
+
+    # stop after 5 while testing
+    if t_count == 5:
+        break
+    t_count += 1

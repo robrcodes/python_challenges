@@ -40,6 +40,6 @@ for link in links:
     print('sleep delay finished')
 
     # stop after 5 while testing
-    if t_count == 5:
+    if t_count == 2:
         break
     t_count += 1

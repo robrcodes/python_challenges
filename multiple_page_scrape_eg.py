@@ -12,6 +12,11 @@ content = result.text
 soup = bs(content, 'lxml')
 t_count = 1
 
+# pagination started, but website down
+# pagination = soup.find('ul', class_='pagination')
+# pages.find_all('li', class_='page-item')
+
+
 box = soup.find('article', class_='main-article')
 
 links = []
@@ -29,8 +34,8 @@ for link in links:
 
     # commented out below to stop writing files while testing
     #
-    # with open(f'{title}.txt', 'w') as file:
-    #     file.write(transcript)  
+    with open(f'{title}.txt', 'w') as file:
+        file.write(transcript)  
     #
     rng = default_rng()
     sleep_delay = rng.uniform(1,3)
@@ -39,7 +44,7 @@ for link in links:
     sleep(sleep_delay)  # random 1 to 3 second delay
     print('sleep delay finished')
 
-    # stop after 5 while testing
-    if t_count == 2:
+    # stop after 2 while testing
+    if t_count == 3:
         break
     t_count += 1
